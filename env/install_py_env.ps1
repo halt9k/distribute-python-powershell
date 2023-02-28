@@ -4,7 +4,7 @@ $ErrorActionPreference = "Stop"
 
 # include
 . .\env\utils.ps1
-. .\env\py_environment.ps1
+. .\env\activate_py_env
 
 Write-Host 'This script will try to verify of install python enviroment automatically.'
 
@@ -89,7 +89,7 @@ function Install-Dependencies  ([string]$env_path)
 	}
 
 
-Ensure-Python $PY_INSTALLER_DOWNLOAD_LINK $PY_ENV_FOLDER
+Ensure-Python $PY_INSTALLER_DOWNLOAD_LINK $TMP_FOLDER
 Ensure-PythonEnviroment $PY_ENV_FOLDER
 Install-Dependencies $PY_ENV_FOLDER
 

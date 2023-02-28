@@ -1,4 +1,5 @@
-$PY_ENV_FOLDER = '.\python_enviroment'
+$PY_ENV_FOLDER = '.\py_env'
+$TMP_FOLDER = '.\tmp'
 
 $PYTHON_LAUNCHER_EXE = "py"
 $ENVIROMENT_ACTIVATION_CMD = "Scripts\Activate.ps1"

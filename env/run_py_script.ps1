@@ -3,7 +3,7 @@ Cls
 $ErrorActionPreference = "Stop"
 
 # include
-. .\env\py_environment.ps1
+. .\env\activate_py_env.ps1
 
 
 function Wait-UserInput 
@@ -13,13 +13,13 @@ function Wait-UserInput
 	}
 
 
-function Run-PyScript
+function Run-PyScript ([string]$script_path)
 	{
 	if (Try-Activate-PythonEnviroment $PY_ENV_FOLDER $True)
 		{
 		Write-Host "Environment activated. Running script"
 		
-		py src\main.py		
+		py $script_path
 
 		deactivate
 		}
@@ -29,4 +29,5 @@ function Run-PyScript
 		}
 	}
 	
-Run-PyScript
+# $Args[0] path to script
+Run-PyScript $Args[0]
