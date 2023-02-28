@@ -1,11 +1,16 @@
 $PY_ENV_FOLDER = '.\py_env'
 $TMP_FOLDER = '.\tmp'
 
-$PYTHON_LAUNCHER_EXE = "py"
+$PY_BIN_FOLDER = '.\py_bin'
+$PYTHON_LAUNCHER_EXE = "python"
 $ENVIROMENT_ACTIVATION_CMD = "Scripts\Activate.ps1"
 
 # include
 . .\env\utils.ps1
+
+
+# if portable, this dir exists and must be in path
+$env:Path += $PY_BIN_FOLDER
 
 function Try-Activate-PythonEnviroment ([string]$env_path, [bool]$activate)
 	{

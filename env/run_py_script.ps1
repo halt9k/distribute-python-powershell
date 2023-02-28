@@ -19,7 +19,7 @@ function Run-PyScript ([string]$script_path)
 		{
 		Write-Host "Environment activated. Running script"
 		
-		py $script_path
+		& $PYTHON_LAUNCHER_EXE $script_path
 
 		deactivate
 		}
