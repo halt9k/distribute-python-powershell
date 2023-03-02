@@ -1,22 +1,17 @@
-$PY_ENV_FOLDER = '.\py_env'
-$TMP_FOLDER = '.\tmp'
-
-$PYTHON_LAUNCHER_EXE = "py"
-$ENVIROMENT_ACTIVATION_CMD = "Scripts\Activate.ps1"
-
 # include
-. .\env\utils.ps1
+. .\src\utils.ps1
+
 
 function Try-Activate-PythonEnviroment ([string]$env_path, [bool]$activate)
 	{
-	Write-Host "Trying to activate $env_path"
+	INFO 'Trying to activate' $env_path
 		
-    $activation_cmd = Join-Path $env_path $ENVIROMENT_ACTIVATION_CMD
+    $activation_cmd = Join-Path $env_path $ENV_ACTIVATION_CMD
     $exists = Test-Path -Path $activation_cmd
 
     if (-not $activate)
         { 
-		Write-Host "Environment activation script exists: $exists"
+		INFO 'Environment activation script exists:' $exists
 		return $exists 
 		}
 
