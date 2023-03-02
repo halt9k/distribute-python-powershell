@@ -1,14 +1,25 @@
-# python-powershell-setup
+#  Distribute python powershell
 
-Use case:
-- you distribute python script which requres Tkinter and other dependencies
-- your end user wants to see code transparently (no binary) and uses Windows and may not have python installed
-- your end user wants easy 1-click run of script
+This powershell commands will help to run python script on the other PC (almost background install or even portable) if
+- distributed py script requres non-defualt modules like Tkinter and pandas
+- you distribute open-source on Windows which may not have python installed
+- your end user wants easy run of scripts because too novice or too enlightened or your end user is auto/offline VM
 
-Hinders:
-- portable python have excessive size (200MB+) and prohibited by Tkinter license limitations
-- even if end-user have python, he may lack libraries (pandas, etc)
-- end user may not be able to select install options properly (for example, to skip py launcher)
+Common problems with this scenario:
+- even if end-user have python, libraries may be missing (pandas, etc)
+- end-user may not be skilled enough to install python or may miss install options (for example, he may skip launcher, which is currently most fluent way)
+- portable python is not officially supported  
+  
+### Usage:  
+1) Place your script instead of ./test/*, modify Install-Dependencies in ./src/install_py_env.ps1  
+#### with end-user download (<1MB):  
+2) Copy whole folder to clean VM or test OS (skipping some files possible)  
+2) Test creation of virtual environment and pip with install_py_env.bat
+3) Test if script works run_test_py_script.bat  
 
-This 1-click powershell installer supposed to ensure virtual environment and pip install.  
-Dependencies are customised in ensure_enviroment.ps1 -> Install-Dependencies.
+#### or portable usage (experimental, >100MB):  
+2) Test creation of portable virtual environment with install_portable_py.bat  
+3) Copy whole folder including new large folders ./py_env and ./py_bin to clean VM or test OS (skipping some files possible)  
+4) Test if script works run_test_py_script.bat  
+
+
