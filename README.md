@@ -1,4 +1,4 @@
-#  Distribute python powershell
+#  Distribute python with powershell
 
 This powershell commands will help to run python script on the other PC (almost background install or even portable) if
 - distributed py script requres non-defualt modules like Tkinter and pandas
