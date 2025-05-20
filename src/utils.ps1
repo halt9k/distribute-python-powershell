@@ -50,18 +50,40 @@ function Ensure-Dir ([string]$dir_path)
 	}
 
 
-function Download-File ([string]$link, [string]$target_path)
+function Download-File($url, $targetFile)
 	{
 	if (Test-Path -Path $target_path) 
 		{
 		INFO "Installer already downloaded. Delete manually to retry: $target_path"
 		return
 		}
-	
-	# wget $link -o $target_path
-	# Set-ExecutionPolicy -ExecutionPolicy Bypass | RemoteSigned -Scope CurrentUser
-	[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-	Invoke-WebRequest -Uri $link  -OutFile $target_path
+
+	# from
+	# https://github.com/freeload101/Java-Android-Magisk-Burp-Objection-Root-Emulator-Easy/blob/02da803c9395c69ef6d3795f65ae6fce0c28bfd6/JAMBOREE.ps1#L473
+    "Downloading $url"
+    $uri = New-Object "System.Uri" "$url"
+    $request = [System.Net.HttpWebRequest]::Create($uri)
+    $request.set_Timeout(15000) #15 second timeout
+    $response = $request.GetResponse()
+    $totalLength = [System.Math]::Floor($response.get_ContentLength()/1024)
+    $responseStream = $response.GetResponseStream()
+    $targetStream = New-Object -TypeName System.IO.FileStream -ArgumentList $targetFile, Create
+    $buffer = new-object byte[] 10KB
+    $count = $responseStream.Read($buffer,0,$buffer.length)
+    $downloadedBytes = $count
+    while ($count -gt 0)
+		{
+        #[System.Console]::CursorLeft = 0
+        #[System.Console]::Write("Downloaded {0}K of {1}K", [System.Math]::Floor($downloadedBytes/1024), $totalLength)
+        $targetStream.Write($buffer, 0, $count)
+        $count = $responseStream.Read($buffer,0,$buffer.length)
+        $downloadedBytes = $downloadedBytes + $count
+		}
+    "Finished Download"
+    $targetStream.Flush()
+    $targetStream.Close()
+    $targetStream.Dispose()
+    $responseStream.Dispose()
 	}
 
 

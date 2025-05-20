@@ -1,4 +1,4 @@
-$PY_INSTALLER_DOWNLOAD_LINK = 'https://www.python.org/ftp/python/3.11.1/python-3.11.1-amd64.exe'
+$PY_INSTALLER_DOWNLOAD_LINK = 'https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe'
 
 $TMP_FOLDER = '.\tmp'
 
