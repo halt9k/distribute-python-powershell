@@ -50,7 +50,7 @@ function Ensure-Dir ([string]$dir_path)
 	}
 
 
-function Download-File($url, $targetFile)
+function Download-File([string]$url, [string]$target_path)
 	{
 	if (Test-Path -Path $target_path) 
 		{
@@ -67,7 +67,7 @@ function Download-File($url, $targetFile)
     $response = $request.GetResponse()
     $totalLength = [System.Math]::Floor($response.get_ContentLength()/1024)
     $responseStream = $response.GetResponseStream()
-    $targetStream = New-Object -TypeName System.IO.FileStream -ArgumentList $targetFile, Create
+    $targetStream = New-Object -TypeName System.IO.FileStream -ArgumentList $target_path, Create
     $buffer = new-object byte[] 10KB
     $count = $responseStream.Read($buffer,0,$buffer.length)
     $downloadedBytes = $count
